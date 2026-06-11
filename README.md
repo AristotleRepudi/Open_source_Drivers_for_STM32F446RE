@@ -1,10 +1,16 @@
 # STM32F446RE Drivers
 
-Register-level peripheral drivers written from scratch for the STM32F446RE microcontroller in C, Baremetal.
+Register-level peripheral drivers written completely from scratch for the STM32F446RE microcontroller in C using Bare-Metal programming.
 
 ## Overview
 
-This Repo's main intent is for me to learn and open source Drivers for my STM32, I like Open Sourcing my work! Open Sourcing helps people connect and create awesome things like Linux, GCC and what not!
+This repository documents my journey into low-level Embedded Systems and Firmware Development by implementing peripheral drivers directly from the STM32F446RE Reference Manual without relying on vendor libraries such as STM32 HAL or LL.
+
+The goal is to understand how microcontrollers work internally by interacting directly with peripheral registers, startup code, linker scripts, vector tables, and hardware interfaces.
+
+Open Source software has enabled incredible projects such as Linux, GCC, Git, and countless Embedded tools. This project is my way of learning in public and contributing back to the community.
+
+---
 
 ## Current Drivers
 
@@ -24,20 +30,53 @@ Features:
 * GPIO Write
 * GPIO Toggle
 
+Status: ✅ Complete
+
+---
+
+### I2C Driver
+
+Features:
+
+* Master Mode Operation
+* START Condition Generation
+* STOP Condition Generation
+* 7-Bit Addressing
+* Transmit Mode
+* Receive Mode
+* Single Byte Read
+* Register Read
+* Register Write
+* Support for I2C1, I2C2 and I2C3
+* OLED Communication Verified
+
+Status: ✅ Complete
+
+---
+
 ## Project Structure
 
 ```text
 STM32F446RE_Drivers/
 │
 ├── Drivers/
-│   └── GPIO/
-│       ├── GPIO.c
-│       └── GPIO.h
+│   ├── GPIO/
+│   │   ├── GPIO.c
+│   │   └── GPIO.h
+│   │
+│   └── I2C/
+│       ├── I2C.c
+│       └── I2C.h
+│
 │
 └── README.md
 ```
 
+---
+
 ## Example
+
+### GPIO
 
 ```c
 GPIO_PinConfig_t LedConfig;
@@ -56,37 +95,70 @@ while(1)
 }
 ```
 
+### I2C
+
+```c
+HAL_I2C_Init(I2C1);
+
+I2C_WriteRegister(I2C1,0x3D,0x00,0xAF);
+```
+
+---
+
 ## Supported Peripherals
 
-| Peripheral | Status |
-|------------|---------|
-| GPIO | ✅ Complete |
-| USART | 🚧 Planned |
-| SPI | 🚧 Planned |
-| I2C | 🚧 Planned |
-| EXTI | 🚧 Planned |
-| Timers | 🚧 Planned |
-| ADC | 🚧 Planned |
+| Peripheral | Status         |
+| ---------- | -------------- |
+| GPIO       | ✅ Complete     |
+| I2C        | ✅ Complete     |
+| USART      | 🚧 In Progress |
+| SPI        | 🚧 Planned     |
+| EXTI       | 🚧 Planned     |
+| Timers     | 🚧 Planned     |
+| ADC        | 🚧 Planned     |
+| PWM        | 🚧 Planned     |
+| DMA        | 🚧 Planned     |
 
-## Goals
+---
 
-* Learn embedded systems through register-level programming
-* Build reusable peripheral drivers
-* Understand STM32 hardware architecture
-* Create a complete driver library from scratch
+## Learning Objectives
 
-## What I Am Learning
+* Register-Level Programming
+* Embedded C
+* Bare-Metal Firmware Development
+* Peripheral Driver Design
+* Hardware Abstraction
+* Cortex-M Architecture
+* Startup Code and Boot Process
+* Linker Scripts
+* Memory Layout
+* Debugging with GDB and OpenOCD
 
-* Register-level programming
-* Peripheral initialization
-* Bit manipulation
-* Hardware abstraction
-* Baremetal firmware development
-* Embedded driver architecture
+---
+
+## Future Goals
+
+* Interrupt-driven Drivers
+* DMA Support
+* Reusable Driver Framework
+* SSD1306 OLED Library
+* FreeRTOS Integration
+* Unit Testing Infrastructure
+* Continuous Integration using GitHub Actions
+
+---
 
 ## Author
 
-ECE Student passionate about Embedded Systems, Firmware Development, and STM32 Microcontrollers.
+ECE Student passionate about:
+
+* Embedded Systems
+* Firmware Development
+* STM32 Microcontrollers
+* Linux
+* Open Source Software
+
+---
 
 ## License
 
